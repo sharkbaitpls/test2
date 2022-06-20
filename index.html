@@ -100,7 +100,7 @@ button.prototype.draw = function() {
 	    if (this.purchased == false){
 		points = points - this.c; 
 		printout += this.n + ": " + this.m + "\n\n";
-		if (scene == 1){delshiftX += 800; acc = 40;}
+		if (scene == 1){delshiftY += 400; acc = 30;}
 		}
 		this.purchased = true;
 	}
@@ -116,19 +116,19 @@ buttonArray.push(new button(300,50,200,5,"Barbara Palvin",1, "has a custom messa
 buttonArray.push(new button(560,50,200,5,"Cameron Diaz",1, "has a custom message","on"));
 
 
-buttonArray.push(new button(40 + 800,50,200,3,"Selena Gomez",1, "has a custom message","on"));
+buttonArray.push(new button(40,50 + 400,200,3,"Selena Gomez",1, "has a custom message","on"));
 
-buttonArray.push(new button(300 + 800,50,200,5,"Lacey Chabert",1, "has a custom message","on"));
+buttonArray.push(new button(300,50 + 400,200,5,"Lacey Chabert",1, "has a custom message","on"));
 
-buttonArray.push(new button(560 + 800,50,200,5,"Victoria Justice",1, "has a custom message","on"));
+buttonArray.push(new button(560,50 + 400,200,5,"Victoria Justice",1, "has a custom message","on"));
 
 
 
-buttonArray.push(new button(40 + 800*2,50,200,3,"Kat Dennings",1, "has a custom message","on"));
+buttonArray.push(new button(40,50 + 400*2,200,3,"Kat Dennings",1, "has a custom message","on"));
 
-buttonArray.push(new button(300 + 800*2,50,200,5,"Brie Larson",1, "has a custom message","on"));
+buttonArray.push(new button(300,50 + 400*2,200,5,"Brie Larson",1, "has a custom message","on"));
 
-buttonArray.push(new button(560 + 800*2,50,200,5,"Ana De Armas",1, "has a custom message","on"));
+buttonArray.push(new button(560,50 + 400*2,200,5,"Ana De Armas",1, "has a custom message","on"));
 function clickfunc(){
 
 for(var i = 0; i < buttonArray.length ; i++) {
@@ -142,12 +142,13 @@ for(var i = 0; i < buttonArray.length ; i++) {
 }
 
 
+if (scene == 0){scene = 1;}
 
 }//End clickfunc
 
 var myVar = setInterval(move, 20);
 
-var scene = 1; 
+var scene = 0; 
 
 var points = 20;
 
@@ -161,13 +162,22 @@ var day = 1;
 
 var acc = 20;
 
-var delshiftX = 0;
+var delshiftY = 0;
 function move() {
 
 //BG
 ctx.fillStyle = "black";
 ctx.fillRect(0,0, 800, 400);
 
+
+if (scene == 0){
+ctx.font = "50px Arial";
+ctx.fillStyle = "white";
+ctx.fillText("THIS IS THE INTRO",45,108);
+}
+
+
+if (scene == 1){
 ctx.drawImage(bg,0,0,800,400);
 
 ctx.shadowColor = "black";
@@ -178,7 +188,7 @@ ctx.shadowColor = "lightblue";
 
 ctx.font = "35px Arial";
 ctx.fillStyle = "white";
-ctx.fillText("Day: " + (delshiftX/800 + 1),45,28);
+ctx.fillText("Day: " + (delshiftY/400 + 1),45,28);
 
 ctx.font = "35px Arial";
 ctx.fillStyle = "white";
@@ -190,9 +200,9 @@ ctx.shadowOffsetX = 0.5;
 ctx.shadowOffsetY = 0.5;
 ctx.shadowColor = "blue";
 
-if (shiftX < delshiftX){shiftX = shiftX + acc; acc = acc - 1;}
-if (shiftX > delshiftX){shiftX = shiftX - 1;}
-
+if (shiftY < delshiftY){shiftY = shiftY + acc; acc = acc - 1;}
+if (shiftY > delshiftY){shiftY = shiftY - 1;}
+}
 
 
 //Prototypes

@@ -52,7 +52,7 @@ this.sound.pause();
 
 //backtrack = new sound("sounds/backtrack.mp3");
 
-var button = function(x,y,w,h,c,n,s,m) {
+var button = function(x,y,w,c,n,s,m,show) {
     this.x = x;
     this.y = y;
     this.w = w;
@@ -64,19 +64,30 @@ var button = function(x,y,w,h,c,n,s,m) {
 	this.verified = false;
 	this.checking = false;
 	this.purchased = false;
+	this.show = show;
 	
 };
 
 button.prototype.draw = function() {
 
-    if (this.s == scene){
-	ctx.strokeRect(this.x, this.y, this.w, this.h);
+    if (this.s == scene && this.show == "on"){
+	//ctx.strokeRect(this.x + shift, this.y, this.w, this.h);
 	var myImage = new Image(100, 200);
     myImage.src = 'celebs/' + this.n + '.png';
-    ctx.drawImage(myImage,this.x,this.y,this.w,this.h);
+    ctx.drawImage(myImage,this.x - shiftX,this.y - shiftY,this.w,this.h);
+	ctx.drawImage(wrapper,this.x  - 10 - shiftX,this.y - 7 - shiftY,220,339);
+	
+	ctx.font = "30px Times New Roman";
+    ctx.fillStyle = "white";
+	ctx.fillText(this.n,this.x - 5 - shiftX,this.y + 290 - shiftY);
+	
+	ctx.font = "20px Times New Roman";
+    ctx.fillStyle = "white";
+	ctx.fillText("Cost: " + String(this.c) + " points",this.x + 50 - shiftX,this.y + 320 - shiftY);
+
 	}
 	
-   if (this.purchased == true){ctx.strokeStyle = "green"; ctx.drawImage(check,this.x,this.y,this.w,this.h);}
+   if (this.purchased == true){ctx.strokeStyle = "green"; ctx.drawImage(check,this.x - shiftX,this.y - shiftY,this.w,this.h);}
 
 	
 	if (this.checking == true && this.purchased == false){
@@ -89,6 +100,7 @@ button.prototype.draw = function() {
 	    if (this.purchased == false){
 		points = points - this.c; 
 		printout += this.n + ": " + this.m + "\n\n";
+		if (scene == 1){delshiftX += 800; acc = 40;}
 		}
 		this.purchased = true;
 	}
@@ -97,10 +109,26 @@ button.prototype.draw = function() {
 
 var buttonArray = [];
 
-buttonArray.push(new button(0,0,200,300,1,"Alice Eve",1, "has hot ass boobs"));
+buttonArray.push(new button(40,50,200,3,"Amanda Seyfried",1, "has a custom message","on"));
 
-buttonArray.push(new button(400,0,300,300,1,"Selena Gomez",1, "has a nice ass"));
+buttonArray.push(new button(300,50,200,5,"Barbara Palvin",1, "has a custom message","on"));
 
+buttonArray.push(new button(560,50,200,5,"Cameron Diaz",1, "has a custom message","on"));
+
+
+buttonArray.push(new button(40 + 800,50,200,3,"Selena Gomez",1, "has a custom message","on"));
+
+buttonArray.push(new button(300 + 800,50,200,5,"Lacey Chabert",1, "has a custom message","on"));
+
+buttonArray.push(new button(560 + 800,50,200,5,"Victoria Justice",1, "has a custom message","on"));
+
+
+
+buttonArray.push(new button(40 + 800*2,50,200,3,"Kat Dennings",1, "has a custom message","on"));
+
+buttonArray.push(new button(300 + 800*2,50,200,5,"Brie Larson",1, "has a custom message","on"));
+
+buttonArray.push(new button(560 + 800*2,50,200,5,"Ana De Armas",1, "has a custom message","on"));
 function clickfunc(){
 
 for(var i = 0; i < buttonArray.length ; i++) {
@@ -121,7 +149,7 @@ var myVar = setInterval(move, 20);
 
 var scene = 1; 
 
-var points = 10;
+var points = 20;
 
 var shiftX = 0;
 
@@ -129,12 +157,51 @@ var shiftY = 0;
 
 var printout = "";
 
+var day = 1;
+
+var acc = 20;
+
+var delshiftX = 0;
 function move() {
 
 //BG
 ctx.fillStyle = "black";
 ctx.fillRect(0,0, 800, 400);
 
+ctx.drawImage(bg,0,0,800,400);
+
+ctx.shadowColor = "black";
+ctx.shadowBlur = 1;
+ctx.shadowOffsetX = 1;
+ctx.shadowOffsetY = 1;
+ctx.shadowColor = "lightblue";
+
+ctx.font = "35px Arial";
+ctx.fillStyle = "white";
+ctx.fillText("Day: " + (delshiftX/800 + 1),45,28);
+
+ctx.font = "35px Arial";
+ctx.fillStyle = "white";
+ctx.fillText("Points: " + points,625,28);
+
+ctx.shadowColor = "black";
+ctx.shadowBlur = 0.5;
+ctx.shadowOffsetX = 0.5;
+ctx.shadowOffsetY = 0.5;
+ctx.shadowColor = "blue";
+
+if (shiftX < delshiftX){shiftX = shiftX + acc; acc = acc - 1;}
+if (shiftX > delshiftX){shiftX = shiftX - 1;}
+
+
+
+//Prototypes
+for(var i = 0; i < buttonArray.length ; i++) {
+        buttonArray[i].draw();
+}
+
+
+//Bottom GUI
 ctx.fillStyle = "gray";
 ctx.fillRect(0,400, 800, 400);
 
@@ -150,12 +217,6 @@ ctx.fillText("shiftY: " + shiftY,220,440);
 ctx.fillText("Scene: " + scene,80,420);
 ctx.fillText("Points: " + points,80,440);
 
-//Prototypes
-for(var i = 0; i < buttonArray.length ; i++) {
-        buttonArray[i].draw();
-}
-
-
 document.getElementById("demo").innerHTML = printout; 
 
 
@@ -167,5 +228,9 @@ document.getElementById("demo").innerHTML = printout;
 <p class="a" id = "demo" value = ""></p>
 
 <img id="check"  style="display:none; visibility:hidden;" src="gui/check.png" alt="">
+
+<img id="wrapper"  style="display:none; visibility:hidden;" src="gui/wrapper.png" alt="">
+
+<img id="bg"  style="display:none; visibility:hidden;" src="gui/bg.png" alt="">
 
 </html> 

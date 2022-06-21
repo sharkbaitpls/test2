@@ -50,7 +50,7 @@ this.sound.pause();
 }   
 }
 
-//backtrack = new sound("sounds/backtrack.mp3");
+impactSound = new sound("sounds/impactSound.mp3");
 
 var button = function(x,y,w,c,n,s,m,show) {
     this.x = x;
@@ -101,6 +101,7 @@ button.prototype.draw = function() {
 		points = points - this.c; 
 		printout += this.n + " " + this.m + "\n\n";
 		if (scene == 1){delshiftY += 400; acc = 30;}
+		impactSound.play();
 		}
 		this.purchased = true;
 	}
@@ -138,6 +139,59 @@ buttonArray.push(new button(40,50 +  400*4,200,2,"Erin Moriarty",1, "","on"));
 buttonArray.push(new button(300,50 + 400*4,200,1,"Halston Sage",1, "","on"));
 buttonArray.push(new button(560,50 + 400*4,200,2,"Rose Leslie",1, "","on"));
 
+//.................................................................................
+buttonArray.push(new button(40,50 +  400*5,200,3,"Candice Swanepoel",1, "","on"));
+buttonArray.push(new button(300,50 + 400*5,200,4,"Taylor Swift",1, "","on"));
+buttonArray.push(new button(560,50 + 400*5,200,5,"Natalie Dormer",1, "","on"));
+
+//.................................................................................
+buttonArray.push(new button(40,50 +  400*6,200,5,"Alexandra Daddario",1, "","on"));
+buttonArray.push(new button(300,50 + 400*6,200,4,"Victoria Justice",1, "","on"));
+buttonArray.push(new button(560,50 + 400*6,200,4,"Amanda Seyfried",1, "","on"));
+
+
+//.................................................................................
+buttonArray.push(new button(40,50 +  400*7,200,3,"Chloe Grace Moretz",1, "","on"));
+buttonArray.push(new button(300,50 + 400*7,200,2,"Jessica Chastain",1, "","on"));
+buttonArray.push(new button(560,50 + 400*7,200,4,"Melissa Benoist",1, "","on"));
+
+//.................................................................................
+buttonArray.push(new button(40,50 +  400*8,200,3,"Sarah Hyland",1, "","on"));
+buttonArray.push(new button(300,50 + 400*8,200,2,"Lana Del Rey",1, "","on"));
+buttonArray.push(new button(560,50 + 400*8,200,3,"Blake Lively",1, "","on"));
+
+
+//.................................................................................
+buttonArray.push(new button(40,50 +  400*9,200,4,"Alice Eve",1, "","on"));
+buttonArray.push(new button(300,50 + 400*9,200,4,"Barbara Palvin",1, "","on"));
+buttonArray.push(new button(560,50 + 400*9,200,5,"Emilia Clarke",1, "","on"));
+
+//.................................................................................
+buttonArray.push(new button(40,50 +  400*10,200,2,"Olivia Rodrigo",1, "","on"));
+buttonArray.push(new button(300,50 + 400*10,200,3,"Lily Collins",1, "","on"));
+buttonArray.push(new button(560,50 + 400*10,200,4,"Camila Cabello",1, "","on"));
+
+//.................................................................................
+buttonArray.push(new button(40,50 +  400*11,200,3,"Dianna Agron",1, "","on"));
+buttonArray.push(new button(300,50 + 400*11,200,2,"Elizabeth Turner",1, "","on"));
+buttonArray.push(new button(560,50 + 400*11,200,2,"Imogen Poots",1, "","on"));
+
+//.................................................................................
+buttonArray.push(new button(40,50 +  400*12,200,2,"Jenna Fischer",1, "","on"));
+buttonArray.push(new button(300,50 + 400*12,200,2,"Kate Mara",1, "","on"));
+buttonArray.push(new button(560,50 + 400*12,200,3,"Eva Green",1, "","on"));
+
+//.................................................................................
+buttonArray.push(new button(40,50 +  400*13,200,5,"Emma Stone",1, "","on"));
+buttonArray.push(new button(300,50 + 400*13,200,5,"Margot Robbie",1, "","on"));
+buttonArray.push(new button(560,50 + 400*13,200,3,"Saoirse Ronan",1, "","on"));
+
+//.................................................................................
+buttonArray.push(new button(40,50 +  400*14,200,2,"Lyndsy Fonseca",1, "","on"));
+buttonArray.push(new button(300,50 + 400*14,200,1,"Melissa Rauch",1, "","on"));
+buttonArray.push(new button(560,50 + 400*14,200,3,"Zoe Saldana",1, "","on"));
+
+
 function clickfunc(){
 
 for(var i = 0; i < buttonArray.length ; i++) {
@@ -157,9 +211,9 @@ if (scene == 0){scene = 1;}
 
 var myVar = setInterval(move, 20);
 
-var scene = 0; 
+var scene = 1; 
 
-var points = 20;
+var points = 60;
 
 var shiftX = 0;
 
@@ -189,6 +243,27 @@ ctx.fillText("THIS IS THE INTRO",45,108);
 if (scene == 1){
 ctx.drawImage(bg,0,0,800,400);
 
+
+if (shiftY < delshiftY){shiftY = shiftY + acc; acc = acc - 1;}
+if (shiftY > delshiftY){shiftY = shiftY - 1;}
+}
+
+
+ctx.shadowColor = "black";
+ctx.shadowBlur = 0;
+ctx.shadowOffsetX = 0;
+ctx.shadowOffsetY = 0;
+ctx.shadowColor = "blue";
+//Prototypes
+for(var i = 0; i < buttonArray.length ; i++) {
+        buttonArray[i].draw();
+}
+
+
+
+if (scene == 1){
+ctx.drawImage(topscreen,0,0,800,400);
+
 ctx.shadowColor = "black";
 ctx.shadowBlur = 1;
 ctx.shadowOffsetX = 1;
@@ -208,15 +283,6 @@ ctx.shadowBlur = 0.5;
 ctx.shadowOffsetX = 0.5;
 ctx.shadowOffsetY = 0.5;
 ctx.shadowColor = "blue";
-
-if (shiftY < delshiftY){shiftY = shiftY + acc; acc = acc - 1;}
-if (shiftY > delshiftY){shiftY = shiftY - 1;}
-}
-
-
-//Prototypes
-for(var i = 0; i < buttonArray.length ; i++) {
-        buttonArray[i].draw();
 }
 
 
@@ -251,5 +317,7 @@ document.getElementById("demo").innerHTML = printout;
 <img id="wrapper"  style="display:none; visibility:hidden;" src="gui/wrapper.png" alt="">
 
 <img id="bg"  style="display:none; visibility:hidden;" src="gui/bg.png" alt="">
+
+<img id="topscreen"  style="display:none; visibility:hidden;" src="gui/topscreen.png" alt="">
 
 </html> 

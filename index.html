@@ -298,6 +298,10 @@ if (scene == -20 && canvasY > 250 && canvasX > 180){
 scene = -19; delshiftY += 400; acc = 30; impactSound.play();
 }
 
+if (scene == 2){
+copyToClipboard(printout);
+}
+
 }//End clickfunc
 
 var myVar = setInterval(move, 20);

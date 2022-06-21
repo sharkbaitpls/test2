@@ -1,5 +1,9 @@
 <html>
 
+<head>
+<meta property="og:image" content="gui/intro.png" />
+</head>
+
 <style>
 p.a {
   white-space: pre;
@@ -9,7 +13,7 @@ p.a {
 
 <body style="background-color:black;">
 
-<canvas id="myCanvas" onload = 'move()' onclick = "clickfunc()" width="800" height="450" style=" padding-left: 0;
+<canvas id="myCanvas" onload = 'move()' onclick = "clickfunc()" width="800" height="400" style=" padding-left: 0;
     padding-right: 0;
 	
     margin-left: auto;
@@ -222,6 +226,53 @@ buttonArray.push(new button(300,50 + 400*20,200,1,"Jane Levy",1, "","on"));
 buttonArray.push(new button(560,50 + 400*20,200,2,"Ariel Winter",1, "","on"));
 
 //.................................................................................
+buttonArray.push(new button(40,50 +  400*21,200,2,"Georgia Hirst",1, "","on"));
+buttonArray.push(new button(300,50 + 400*21,200,3,"Chloe Bennet",1, "","on"));
+buttonArray.push(new button(560,50 + 400*21,200,2,"Sandra Bullock",1, "","on"));
+
+
+//.................................................................................
+buttonArray.push(new button(40,50 +  400*22,200,1,"Nina Agdal",1, "","on"));
+buttonArray.push(new button(300,50 + 400*22,200,2,"Lacey Chabert",1, "","on"));
+buttonArray.push(new button(560,50 + 400*22,200,4,"Emma Roberts",1, "","on"));
+
+//.................................................................................
+buttonArray.push(new button(40,50 +  400*23,200,4,"Maisie Williams",1, "","on"));
+buttonArray.push(new button(300,50 + 400*23,200,2,"Betty Gilpin",1, "","on"));
+buttonArray.push(new button(560,50 + 400*23,200,4,"Rihanna",1, "","on"));
+
+//.................................................................................
+buttonArray.push(new button(40,50 +  400*24,200,3,"Milana Vayntrub",1, "","on"));
+buttonArray.push(new button(300,50 + 400*24,200,1,"Gillian Jacobs",1, "","on"));
+buttonArray.push(new button(560,50 + 400*24,200,2,"Karen Fukuhara",1, "","on"));
+
+//.................................................................................
+buttonArray.push(new button(40,50 +  400*25,200,1,"Alyson Hannigan",1, "","on"));
+buttonArray.push(new button(300,50 + 400*25,200,1,"Laurie Holden",1, "","on"));
+buttonArray.push(new button(560,50 + 400*25,200,2,"Shanina Shaik",1, "","on"));
+
+//.................................................................................
+buttonArray.push(new button(40,50 +  400*26,200,1,"Hannah Waddingham",1, "","on"));
+buttonArray.push(new button(300,50 + 400*26,200,2,"Amy Adams",1, "","on"));
+buttonArray.push(new button(560,50 + 400*26,200,1,"Bessie Carter",1, "","on"));
+
+//.................................................................................
+buttonArray.push(new button(40,50 +  400*27,200,1,"Yoona Im",1, "","on"));
+buttonArray.push(new button(300,50 + 400*27,200,2,"Jordana Brewster",1, "","on"));
+buttonArray.push(new button(560,50 + 400*27,200,1,"Priyanka Chopra",1, "","on"));
+
+//.................................................................................
+buttonArray.push(new button(40,50 +  400*28,200,2,"Inanna Sarkis",1, "","on"));
+buttonArray.push(new button(300,50 + 400*28,200,3,"Hilary Duff",1, "","on"));
+buttonArray.push(new button(560,50 + 400*28,200,4,"Jenna Coleman",1, "","on"));
+
+//.................................................................................
+buttonArray.push(new button(40,50 +  400*29,200,1,"Kaitlyn Dever",1, "","on"));
+buttonArray.push(new button(300,50 + 400*29,200,3,"Joey King",1, "","on"));
+buttonArray.push(new button(560,50 + 400*29,200,2,"Rachel Weisz",1, "","on"));
+
+
+//.................................................................................
 //buttonArray.push(new button(40,50 +  400*15,200,2,"",1, "","on"));
 //buttonArray.push(new button(300,50 + 400*15,200,1,"",1, "","on"));
 //buttonArray.push(new button(560,50 + 400*15,200,3,"",1, "","on"));
@@ -239,27 +290,33 @@ for(var i = 0; i < buttonArray.length ; i++) {
 }
 
 
-if (scene == 0){scene = 1;}
+if (scene == -19 && canvasY > 250 && canvasX > 180){
+scene = 1; delshiftY += 400; acc = 30; impactSound.play();
+}
+
+if (scene == -20 && canvasY > 250 && canvasX > 180){
+scene = -19; delshiftY += 400; acc = 30; impactSound.play();
+}
 
 }//End clickfunc
 
 var myVar = setInterval(move, 20);
 
-var scene = 1; 
+var scene = -20; 
 
-var points = 100;
+var points = 69;
 
 var shiftX = 0;
 
-var shiftY = 0;
+var shiftY = -800;
 
 var printout = "";
 
 var day = 1;
 
-var acc = 20;
+var acc = 0;
 
-var delshiftY = 0;
+var delshiftY = -800;
 function move() {
 
 //BG
@@ -267,10 +324,18 @@ ctx.fillStyle = "black";
 ctx.fillRect(0,0, 800, 400);
 
 
-if (scene == 0){
-ctx.font = "50px Arial";
-ctx.fillStyle = "white";
-ctx.fillText("THIS IS THE INTRO",45,108);
+if (scene == -20){
+ctx.drawImage(intro,0,-800 - shiftY,800,400);
+ctx.drawImage(page1,0,-400 - shiftY,800,400);
+}
+
+if (scene == -19){
+ctx.drawImage(intro,0,-800 - shiftY,800,400);
+ctx.drawImage(page1,0, -400 - shiftY,800,400);
+
+
+if (shiftY < delshiftY){shiftY = shiftY + acc; acc = acc - 1;}
+if (shiftY > delshiftY){shiftY = shiftY - 1;}
 }
 
 
@@ -296,6 +361,7 @@ for(var i = 0; i < buttonArray.length ; i++) {
 
 
 if (scene == 1){
+ctx.drawImage(page1,0, -400 - shiftY,800,400);
 ctx.drawImage(topscreen,0,0,800,400);
 
 ctx.shadowColor = "black";
@@ -317,6 +383,23 @@ ctx.shadowBlur = 0.5;
 ctx.shadowOffsetX = 0.5;
 ctx.shadowOffsetY = 0.5;
 ctx.shadowColor = "blue";
+
+if (points < 1){scene = 2; copyToClipboard(printout);}
+
+if (shiftY == 7200 && points < 3){scene = 2; copyToClipboard(printout);}
+if (shiftY == 6800 && points < 2){scene = 2; copyToClipboard(printout);}
+if (shiftY == 6400 && points < 2){scene = 2; copyToClipboard(printout);}
+if (shiftY == 6000 && points < 2){scene = 2; copyToClipboard(printout);}
+if (shiftY == 8400 && points < 2){scene = 2; copyToClipboard(printout);}
+if (shiftY == 9200 && points < 2){scene = 2; copyToClipboard(printout);}
+if (shiftY == 11200 && points < 2){scene = 2; copyToClipboard(printout);}
+
+
+if (shiftY == 12000){scene = 2; copyToClipboard(printout);}
+}
+
+if (scene == 2){
+ctx.drawImage(page2,0,shiftY - shiftY,800,400);
 }
 
 
@@ -339,9 +422,17 @@ ctx.fillText("Points: " + points,80,440);
 document.getElementById("demo").innerHTML = printout; 
 
 
+
 }//End of FUNCTION
 
-
+function copyToClipboard(text) {
+   const elem = document.createElement('textarea');
+   elem.value = text;
+   document.body.appendChild(elem);
+   elem.select();
+   document.execCommand('copy');
+   document.body.removeChild(elem);
+}
 </script>
 
 <p class="a" id = "demo" value = ""></p>
@@ -353,5 +444,10 @@ document.getElementById("demo").innerHTML = printout;
 <img id="bg"  style="display:none; visibility:hidden;" src="gui/bg.png" alt="">
 
 <img id="topscreen"  style="display:none; visibility:hidden;" src="gui/topscreen.png" alt="">
+
+<img id="intro"  style="display:none; visibility:hidden;" src="gui/intro.png" alt="">
+<img id="page1"  style="display:none; visibility:hidden;" src="gui/page1.png" alt="">
+<img id="page2"  style="display:none; visibility:hidden;" src="gui/page2.png" alt="">
+
 
 </html> 

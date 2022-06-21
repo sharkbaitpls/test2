@@ -39,6 +39,15 @@ canvas.addEventListener("mousemove", function(e) {
 });
 
 
+function copyToClipboard(text) {
+   const elem = document.createElement('textarea');
+   elem.value = text;
+   document.body.appendChild(elem);
+   elem.select();
+   document.execCommand('copy');
+   document.body.removeChild(elem);
+}
+
 function sound(src) {
  this.sound = document.createElement("audio");
 this.sound.src = src;
@@ -300,8 +309,9 @@ scene = -19; delshiftY += 400; acc = 30; impactSound.play();
 
 
 if (scene == 2){
-copyToClipboard(printout); scene = 3;
+scene = 3; copyToClipboard(printout);
 }
+
 
 }//End clickfunc
 
@@ -309,7 +319,7 @@ var myVar = setInterval(move, 20);
 
 var scene = -20; 
 
-var points = 69;
+var points = 20;
 
 var shiftX = 0;
 
@@ -404,11 +414,11 @@ if (shiftY == 12000){scene = 2;}
 }
 
 if (scene == 2){
-ctx.drawImage(page2,0,shiftY - shiftY,800,400);
+ctx.drawImage(page2,0,0,800,400);
 }
 
 if (scene == 3){
-ctx.drawImage(end,0,shiftY - shiftY,800,400);
+ctx.drawImage(end,0,0,800,400);
 }
 
 //Bottom GUI
@@ -433,14 +443,6 @@ document.getElementById("demo").innerHTML = printout;
 
 }//End of FUNCTION
 
-function copyToClipboard(text) {
-   const elem = document.createElement('textarea');
-   elem.value = text;
-   document.body.appendChild(elem);
-   elem.select();
-   document.execCommand('copy');
-   document.body.removeChild(elem);
-}
 </script>
 
 <p class="a" id = "demo" value = ""></p>

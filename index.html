@@ -73,7 +73,9 @@ var button = function(x,y,w,c,n,s,m,show) {
 };
 
 button.prototype.draw = function() {
-
+if (scene == 2){
+copyToClipboard(printout); scene = 3;
+}
     if (this.s == scene && this.show == "on"){
 	//ctx.strokeRect(this.x + shift, this.y, this.w, this.h);
 	var myImage = new Image(100, 200);
@@ -299,9 +301,7 @@ scene = -19; delshiftY += 400; acc = 30; impactSound.play();
 }
 
 
-if (scene == 3){
-copyToClipboard(printout);
-}
+
 
 if (scene == 2){
 copyToClipboard(printout); scene = 3;

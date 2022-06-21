@@ -299,6 +299,9 @@ scene = -19; delshiftY += 400; acc = 30; impactSound.play();
 }
 
 
+if (scene == 3){
+copyToClipboard(printout);
+}
 
 if (scene == 2){
 copyToClipboard(printout); scene = 3;
@@ -392,16 +395,16 @@ ctx.shadowColor = "blue";
 
 if (points < 1){scene = 2; copyToClipboard(printout);}
 
-if (shiftY == 7200 && points < 3){scene = 2; copyToClipboard(printout);}
-if (shiftY == 6800 && points < 2){scene = 2; copyToClipboard(printout);}
-if (shiftY == 6400 && points < 2){scene = 2; copyToClipboard(printout);}
-if (shiftY == 6000 && points < 2){scene = 2; copyToClipboard(printout);}
-if (shiftY == 8400 && points < 2){scene = 2; copyToClipboard(printout);}
-if (shiftY == 9200 && points < 2){scene = 2; copyToClipboard(printout);}
-if (shiftY == 11200 && points < 2){scene = 2; copyToClipboard(printout);}
+if (shiftY == 7200 && points < 3){scene = 2;}
+if (shiftY == 6800 && points < 2){scene = 2;}
+if (shiftY == 6400 && points < 2){scene = 2;}
+if (shiftY == 6000 && points < 2){scene = 2;}
+if (shiftY == 8400 && points < 2){scene = 2;}
+if (shiftY == 9200 && points < 2){scene = 2;}
+if (shiftY == 11200 && points < 2){scene = 2;}
 
 
-if (shiftY == 12000){scene = 2; copyToClipboard(printout);}
+if (shiftY == 12000){scene = 2;}
 }
 
 if (scene == 2){

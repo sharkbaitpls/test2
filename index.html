@@ -298,8 +298,10 @@ if (scene == -20 && canvasY > 250 && canvasX > 180){
 scene = -19; delshiftY += 400; acc = 30; impactSound.play();
 }
 
+
+
 if (scene == 2){
-copyToClipboard(printout);
+copyToClipboard(printout); scene = 3;
 }
 
 }//End clickfunc
@@ -406,6 +408,9 @@ if (scene == 2){
 ctx.drawImage(page2,0,shiftY - shiftY,800,400);
 }
 
+if (scene == 3){
+ctx.drawImage(end,0,shiftY - shiftY,800,400);
+}
 
 //Bottom GUI
 ctx.fillStyle = "gray";
@@ -452,6 +457,7 @@ function copyToClipboard(text) {
 <img id="intro"  style="display:none; visibility:hidden;" src="gui/intro.png" alt="">
 <img id="page1"  style="display:none; visibility:hidden;" src="gui/page1.png" alt="">
 <img id="page2"  style="display:none; visibility:hidden;" src="gui/page2.png" alt="">
+<img id="end"  style="display:none; visibility:hidden;" src="gui/end.png" alt="">
 
 
 </html> 

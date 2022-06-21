@@ -73,9 +73,7 @@ var button = function(x,y,w,c,n,s,m,show) {
 };
 
 button.prototype.draw = function() {
-if (scene == 2){
-copyToClipboard(printout); scene = 3;
-}
+
     if (this.s == scene && this.show == "on"){
 	//ctx.strokeRect(this.x + shift, this.y, this.w, this.h);
 	var myImage = new Image(100, 200);
@@ -301,8 +299,6 @@ scene = -19; delshiftY += 400; acc = 30; impactSound.play();
 }
 
 
-
-
 if (scene == 2){
 copyToClipboard(printout); scene = 3;
 }
@@ -393,7 +389,7 @@ ctx.shadowOffsetX = 0.5;
 ctx.shadowOffsetY = 0.5;
 ctx.shadowColor = "blue";
 
-if (points < 1){scene = 2; copyToClipboard(printout);}
+if (points < 1){scene = 2;}
 
 if (shiftY == 7200 && points < 3){scene = 2;}
 if (shiftY == 6800 && points < 2){scene = 2;}
